@@ -1,0 +1,33 @@
+.form-group{
+
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    row-gap: 40px;
+}
+
+.login{
+
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    row-gap: 10px;
+}
+
+
+.formInputs{
+
+    justify-content: space-evenly;
+    
+
+}
+
+.form-floating{
+
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    column-gap: 5px;
+}
+
