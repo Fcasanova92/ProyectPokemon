@@ -1,4 +1,4 @@
-from jwt import encode, decode, exceptions
+import jwt
 
 from datetime import datetime, timedelta
 
@@ -14,7 +14,7 @@ def expire_data(days:int):
 #generamos el token, lo enviamos al front, tanto el loggin y register, en ambos casos el token se guardara en una cookie
 
 def write_token(data):
-    token = encode(payload={**data, "exp":expire_data(2)}, algorithm="HS256", key=secret_key)
+    token = jwt.encode(payload={**data, "exp":expire_data(2)}, algorithm="HS256", key=secret_key)
     return token.encode("UTF-8")
 
 #este endpoint lo utilizamos en un use effect, para generar rutas privadas
@@ -22,10 +22,10 @@ def write_token(data):
 def validate_token(token, output=False):
     try:
         if output:
-            return decode(token, algorithms=["HS256"], key=secret_key)
+            return jwt.decode(token, algorithms=["HS256"], key=secret_key)
 
-    except exceptions.DecodeError:
+    except jwt.exceptions.DecodeError:
         return {"status":401, "message":"invalid_token"}
     
-    except exceptions.ExpiredSignatureError:
+    except jwt.exceptions.ExpiredSignatureError:
         return {"status":401, "message":"token_expired"}
