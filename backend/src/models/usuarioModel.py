@@ -10,7 +10,7 @@ class usuarioModel:
 
          cursor = connection.cursor()
          
-         sql = "INSERT INTO `user_poke_app`.`user` (`nombre`, `apellido`, `usuario`, `email`, `password`,`ID`) VALUES (%s,%s,%s,%s,%s, NULL);"
+         sql = "INSERT INTO `user_poke_app`.`user` (`id`,`name`, `surname`, `username`, `email`, `passwords`) VALUES (NULL, %s,%s,%s,%s,%s);"
 
          cursor.execute(sql,data)
 
@@ -38,8 +38,10 @@ class usuarioModel:
 
         return query_data
     
-    @classmethod
+    @staticmethod
     def get_UserByFilter(filter, value):
+
+        print("pass")
 
         connection = get_db()
 

@@ -15,7 +15,7 @@ def register():
 
     emailBBDD = usuarioModel().get_UserByFilter('email', data['email'] )
 
-    usernameBBDD = usuarioModel().get_UserByFilter('usuario', data['username'] )
+    usernameBBDD = usuarioModel().get_UserByFilter('usuario', data['username'])
 
 
     if len(emailBBDD) == 0 and len(usernameBBDD) == 0:
@@ -26,11 +26,9 @@ def register():
 
         userJwt = authenticateJwt.write_token(data)
 
-        # agregar columna en usuario para agregar el JWT
-
         usuarioModel().create_Usuario(dataUser)
 
-        return {'registerValid': True}, 200
+        return {'registerValid': True, 'Token':userJwt }, 200
 
 
     
